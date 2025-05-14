@@ -17,4 +17,39 @@ header, footer {
 
 main {
     padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+details {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    padding: 1em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 0.5em;
+}
+
+summary:hover {
+    color: #007acc;
+}
+
+
+code {
+    display: block;
+    background-color: #eee;
+    padding: 1em;
+    margin-top: 0.5em;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
