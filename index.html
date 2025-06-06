@@ -63,14 +63,15 @@
                             <li>Settings > Windows Update > Check for updates</li>
                             <li>Terminal (not admin) <br>
                                 <code>
-                                    winget update
-                                    winget update --all
+winget update
+winget update --all
                                 </code>
                             </li>
                             <li>Settings > System > Storage > Temporary Files > Remove Files</li>
                             <li>Admin terminal <br>
                                 <code>
-                                    C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
+Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
+C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
                                 </code>
                             </li>
                             <li>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</li>
@@ -90,8 +91,8 @@
                             <li>Settings > Windows Update > Check for updates</li>
                             <li>Terminal (not admin) <br>
                                 <code>
-                                    winget update
-                                    winget update --all
+winget update
+winget update --all
                                 </code>
                             </li>
                             <li>Settings > System > Storage > Temporary Files > Remove Files</li>
