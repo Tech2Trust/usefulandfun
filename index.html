@@ -49,6 +49,61 @@
                 <code>family.adguard-dns.com</code>
             </div>
         </details>
+        <details>
+            <summary>HyperV</summary>
+            <div>
+                <details>
+                    <summary>Update VM-W11-SYSPREP</summary>
+                    <div>
+                        <ol>
+                            <li>Start VM-W11-SYSPREP</li>
+                            <li>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</li>
+                            <li>Settings > Windows Update > Check for updates</li>
+                            <li>Restart using the Windows Update prompt</li>
+                            <li>Settings > Windows Update > Check for updates</li>
+                            <li>Terminal (not admin) <br>
+                                <code>
+                                    winget update
+                                    winget update --all
+                                </code>
+                            </li>
+                            <li>Settings > System > Storage > Temporary Files > Remove Files</li>
+                            <li>Admin terminal <br>
+                                <code>
+                                    C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
+                                </code>
+                            </li>
+                            <li>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</li>
+                            <li>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</li>
+                            <li>7zip > "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" > Right-click VM-W11-SYSPREP.vhdx > Add to archive... > C:\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY > Split to 1000M > Background</li>
+                        </ol>
+                    </div>
+                </details>
+                <details>
+                    <summary>Update VM-W11-SBX-##</summary>
+                    <div>
+                        <ol>
+                            <li>Revert to START HERE checkpoint</li>
+                            <li>Start VM-W11-SBX-##</li>
+                            <li>Settings > Windows Update > Check for updates</li>
+                            <li>Restart using the Windows Update prompt</li>
+                            <li>Settings > Windows Update > Check for updates</li>
+                            <li>Terminal (not admin) <br>
+                                <code>
+                                    winget update
+                                    winget update --all
+                                </code>
+                            </li>
+                            <li>Settings > System > Storage > Temporary Files > Remove Files</li>
+                            <li>Shutdown</li>
+                            <li>HyperV Manager > VM-W11-SYSPREP > Delete START HERE checkpoint</li>
+                            <li>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</li>
+                            <li>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </details>        
     </main>
     
     <header>
