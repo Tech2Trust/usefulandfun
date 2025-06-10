@@ -1,55 +1,156 @@
 /* styles.css */
-
+/* Base styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Calibri, sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
     margin: 0;
-    padding: 1em 0;
-    background-color: #f4f4f4;
-    color: #333;
+    padding: 0;
+    background-color: var(--background);
+    color: var(--text);
 }
 
-header, footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: Calibri, sans-serif;
+    margin: 0.5em 0;
 }
 
-main {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+/* Paragraph styles */
+p {
+    margin: 0.5em 0;
 }
 
-details {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 1em;
-    padding: 1em;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+/* List styles */
+ol, ul {
+    padding-left: 2em;
+    margin-bottom: 2em;
+    font-family: Calibri, sans-serif;
+    font-size: 1.1em;
 }
 
-
-summary {
-    font-weight: bold;
-    cursor: pointer;
+ol li, ul li {
     margin-bottom: 0.5em;
 }
 
-summary:hover {
-    color: #007acc;
+/* Custom horizontal rule */
+.custom-hr {
+    height: 1px;
+    background-color: rgb(125, 125, 125);
+    border: none;
+    width: 50%;
+    margin: 1em 0;
 }
 
+/* Details and summary styles */
+details {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
 
-code {
-    display: block;
-    background-color: #eee;
-    padding: 1em;
-    margin-top: 0.5em;
-    border-radius: 5px;
-    font-family: Consolas, monospace;
-    white-space: pre-wrap;
-    word-break: break-word;
+details > summary {
+    list-style: none;
+    color: var(--blue);
+    font-size: 1.2em;
+    text-decoration: none;
+    text-transform: capitalize;
+    padding: 12px 15px 10px 15px;
+    margin-bottom: 0px;
+    background-color: var(--platinum);
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+summary:hover {
+    color: var(--white);
+    background-color: var(--blue);
+}
+
+summary > open {
+    color: var(--black);
+    background-color: var(--blue);
+}
+
+summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+details[open] > summary::before {
+    transform: rotate(90deg);
+}
+
+/* Optional: remove default marker in some browsers */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+details > div {
+    border: 1px solid #f3f3f3;
+    border-radius: 4px;
+    margin-top: 0;
+    padding: 1rem;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+    --background: #121212;
+    --text: #e0e0e0;
+    --blue: #1e90ff;
+    --platinum: #3a3a3a;
+    --white: #ffffff;
+    --black: #000000;
+    }
+}
+
+/* Light mode support */
+@media (prefers-color-scheme: light) {
+    :root {
+    --background: #ffffff;
+    --text: #000000;
+    --blue: #1e90ff;
+    --platinum: #e5e5e5;
+    --white: #ffffff;
+    --black: #000000;
+    }
+}
+
+/* Responsive layout helpers */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.flex-item {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem;
+    background-color: var(--platinum);
+    border-radius: 4px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.grid-item {
+    padding: 1rem;
+    background-color: var(--platinum);
+    border-radius: 4px;
 }
