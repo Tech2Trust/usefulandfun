@@ -30,6 +30,9 @@
                 <p>A simple application for more secure password transportation. It encrypts an entry and generates a secret link. Accessing the link displays the entry and removes it at the same time.  The link can be sent by email or social media.</p>
                 <p>Project: <a href="https://www.read2burn.com/">Read2Burn</a></p>
             </div>
+            <div>
+                <p>Project: <a href="https://securesha.re/">Secure Share</a></p>
+            </div>
         </details>
         <details>
             <summary>PowerShell</summary>
@@ -53,58 +56,54 @@
             <summary>HyperV</summary>
             <div>
                 <details>
-                    <summary>Update VM-W11-SYSPREP</summary>
+                    <summary>Updating VM-W11-SYSPREP</summary>
                     <div>
                         <ol>
                             <li>Start VM-W11-SYSPREP</li>
                             <li>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</li>
-                            <li>Settings > Windows Update > Check for updates</li>
+                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
                             <li>Restart using the Windows Update prompt</li>
-                            <li>Settings > Windows Update > Check for updates</li>
-                            <li>Terminal (not admin) <br>
-                                <code>
+                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
+                            <li>Terminal (not admin)</li>
+                            <code>
 winget update
 winget update --all
-                                </code>
-                            </li>
-                            <li>Settings > System > Storage > Temporary Files > Remove Files</li>
-                            <li>Admin terminal <br>
-                                <code>
-Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
+                            </code>
+                            <li>Settings &gt; System &gt; Storage &gt; Temporary Files &gt; Remove Files</li>
+                            <li>Admin terminal</li>
+                            <code>
 C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
-                                </code>
-                            </li>
-                            <li>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</li>
-                            <li>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</li>
-                            <li>7zip > "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" > Right-click VM-W11-SYSPREP.vhdx > Add to archive... > C:\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY > Split to 1000M > Background</li>
+                            </code>
+                            <li>HyperV Manager &gt; VM-W11-SYSPREP &gt; Delete all checkpoints</li>
+                            <li>HyperV Manager &gt; VM-W11-SYSPREP &gt; Settings &gt; Management &gt; Name &gt; Update the Notes</li>
+                            <li>7zip &gt; "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" &gt; Right-click VM-W11-SYSPREP.vhdx &gt; Add to archive... &gt; C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY &gt; Split to 1000M &gt; Background</li>
                         </ol>
                     </div>
                 </details>
                 <details>
-                    <summary>Update VM-W11-SBX-##</summary>
+                    <summary>Updating VM-W11-SBX-##</summary>
                     <div>
                         <ol>
                             <li>Revert to START HERE checkpoint</li>
                             <li>Start VM-W11-SBX-##</li>
-                            <li>Settings > Windows Update > Check for updates</li>
+                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
                             <li>Restart using the Windows Update prompt</li>
-                            <li>Settings > Windows Update > Check for updates</li>
-                            <li>Terminal (not admin) <br>
-                                <code>
+                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
+                            <li>Terminal (not admin)</li>
+                            <code>
 winget update
 winget update --all
-                                </code>
-                            </li>
-                            <li>Settings > System > Storage > Temporary Files > Remove Files</li>
+                            </code>
+                            <li>Settings &gt; System &gt; Storage &gt; Temporary Files &gt; Remove Files</li>
                             <li>Shutdown</li>
-                            <li>HyperV Manager > VM-W11-SYSPREP > Delete START HERE checkpoint</li>
-                            <li>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</li>
-                            <li>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</li>
+                            <li>HyperV Manager &gt; VM-W11-SBX-## &gt; Delete START HERE checkpoint</li>
+                            <li>HyperV Manager &gt; VM-W11-SBX-## &gt; Checkpoint &gt; Rename to START HERE</li>
+                            <li>HyperV Manager &gt; VM-W11-SBX-## &gt; Settings &gt; Management &gt; Name &gt; Update the Notes</li>
                         </ol>
                     </div>
                 </details>
             </div>
-        </details>        
+        </details>
     </main>
     
     <header>
