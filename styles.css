@@ -111,14 +111,15 @@ header, footer {
 }
 
 code {
-    display: block;
-    background-color: #eee;
-    padding: 1em;
-    margin-top: 0.5em;
-    border-radius: 5px;
-    font-family: Consolas, monospace;
-    white-space: pre-wrap;
-    word-break: break-word;
+  display: block;
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  padding: 1em;
+  margin-top: 0.5em;
+  border-radius: 5px;
+  font-family: Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 @keyframes fadeIn {
@@ -128,26 +129,30 @@ code {
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-    :root {
+  :root {
     --background: #121212;
     --text: #e0e0e0;
     --blue: #1e90ff;
     --platinum: #3a3a3a;
     --white: #ffffff;
     --black: #000000;
-    }
+    --code-bg: #1e1e1e;
+    --code-text: #e0e0e0;
+  }
 }
 
 /* Light mode support */
 @media (prefers-color-scheme: light) {
-    :root {
+  :root {
     --background: #ffffff;
     --text: #000000;
     --blue: #1e90ff;
     --platinum: #e5e5e5;
     --white: #ffffff;
     --black: #000000;
-    }
+    --code-bg: #eee;
+    --code-text: #000;
+  }
 }
 
 /* Responsive layout helpers */
@@ -175,4 +180,41 @@ code {
     padding: 1rem;
     background-color: var(--platinum);
     border-radius: 4px;
+}
+
+/* Tickable checklist with numbering */
+ol.checklist.numbered {
+  counter-reset: checklist-counter;
+  list-style: none;
+  padding-left: 0;
+}
+
+ol.checklist.numbered li {
+  counter-increment: checklist-counter;
+  margin-bottom: 1em;
+  position: relative;
+  padding-left: 2.5em;
+}
+
+ol.checklist.numbered li::before {
+  content: counter(checklist-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  font-weight: bold;
+  color: var(--text);
+}
+
+ol.checklist.numbered input[type="checkbox"] {
+  margin-right: 0.75em;
+  transform: scale(1.2);
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+ol.checklist.numbered label {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
 }
