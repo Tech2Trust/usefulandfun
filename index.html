@@ -58,47 +58,47 @@
                 <details>
                     <summary>Updating VM-W11-SYSPREP</summary>
                     <div>
-                        <ol>
-                            <li>Start VM-W11-SYSPREP</li>
-                            <li>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</li>
-                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
-                            <li>Restart using the Windows Update prompt</li>
-                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
-                            <li>Terminal (not admin)</li>
-                            <code>
-winget update
-winget update --all
-                            </code>
-                            <li>Settings &gt; System &gt; Storage &gt; Temporary Files &gt; Remove Files</li>
-                            <li>Admin terminal</li>
-                            <code>
-C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
-                            </code>
-                            <li>HyperV Manager &gt; VM-W11-SYSPREP &gt; Delete all checkpoints</li>
-                            <li>HyperV Manager &gt; VM-W11-SYSPREP &gt; Settings &gt; Management &gt; Name &gt; Update the Notes</li>
-                            <li>7zip &gt; "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" &gt; Right-click VM-W11-SYSPREP.vhdx &gt; Add to archive... &gt; C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY &gt; Split to 1000M &gt; Background</li>
+                        <ol class="checklist numbered">
+                        <li><label><input type="checkbox"><span>Start VM-W11-SYSPREP</span></label></li>
+                        <li><label><input type="checkbox"><span>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</span></label></li>
+                        <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                        <li><label><input type="checkbox"><span>Restart using the Windows Update prompt</span></label></li>
+                        <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                        <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
+                        <code>
+                        winget update
+                        winget update --all
+                        </code>
+                        <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
+                        <li><label><input type="checkbox"><span>Admin terminal</span></label></li>
+                        <code>
+                        C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
+                        </code>
+                        <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</span></label></li>
+                        <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</span></label></li>
+                        <li><label><input type="checkbox"><span>7zip > "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" > Right-click VM-W11-SYSPREP.vhdx > Add to archive... > C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY > Split to 1000M > Background</span></label></li>
                         </ol>
                     </div>
                 </details>
                 <details>
                     <summary>Updating VM-W11-SBX-##</summary>
                     <div>
-                        <ol>
-                            <li>Revert to START HERE checkpoint</li>
-                            <li>Start VM-W11-SBX-##</li>
-                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
-                            <li>Restart using the Windows Update prompt</li>
-                            <li>Settings &gt; Windows Update &gt; Check for updates</li>
-                            <li>Terminal (not admin)</li>
-                            <code>
-winget update
-winget update --all
-                            </code>
-                            <li>Settings &gt; System &gt; Storage &gt; Temporary Files &gt; Remove Files</li>
-                            <li>Shutdown</li>
-                            <li>HyperV Manager &gt; VM-W11-SBX-## &gt; Delete START HERE checkpoint</li>
-                            <li>HyperV Manager &gt; VM-W11-SBX-## &gt; Checkpoint &gt; Rename to START HERE</li>
-                            <li>HyperV Manager &gt; VM-W11-SBX-## &gt; Settings &gt; Management &gt; Name &gt; Update the Notes</li>
+                        <ol class="checklist numbered">
+                        <li><label><input type="checkbox"><span>Revert to START HERE checkpoint</span></label></li>
+                        <li><label><input type="checkbox"><span>Start VM-W11-SBX-##</span></label></li>
+                        <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                        <li><label><input type="checkbox"><span>Restart using the Windows Update prompt</span></label></li>
+                        <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                        <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
+                        <code>
+                        winget update
+                        winget update --all
+                        </code>
+                        <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
+                        <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                        <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete START HERE checkpoint</span></label></li>
+                        <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</span></label></li>
+                        <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Management > Name > Update the Notes</span></label></li>
                         </ol>
                     </div>
                 </details>
