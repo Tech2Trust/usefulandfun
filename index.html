@@ -17,7 +17,7 @@
             <summary>Android</summary>
             <div>
                 <p>Private DNS</p>
-                <code>family.adguard-dns.com</code>
+                <pre><code>family.adguard-dns.com</code></pre>
             </div>
         </details>
         <details>
@@ -34,14 +34,14 @@
                         <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
                         <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
                         <pre><code>
-                        winget update
-                        winget update --all
+winget update
+winget update --all
                         </code></pre>
                         <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
                         <li><label><input type="checkbox"><span>Admin terminal</span></label></li>
                         <pre><code>
-                        Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
-                        C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
+Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
+C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
                         </code></pre>
                         <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</span></label></li>
                         <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</span></label></li>
@@ -59,10 +59,10 @@
                         <li><label><input type="checkbox"><span>Restart using the Windows Update prompt</span></label></li>
                         <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
                         <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
-                        <code>
-                        winget update
-                        winget update --all
-                        </code>
+                        <pre><code>
+winget update
+winget update --all
+                        </code></pre>
                         <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
                         <li><label><input type="checkbox"><span>Shutdown</span></label></li>
                         <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete START HERE checkpoint</span></label></li>
@@ -80,7 +80,7 @@
                 <details>
                     <summary>Network</summary>
                     <div>
-                        <code>Get-NetIPConfiguration</code>
+                        <pre><code>Get-NetIPConfiguration</code></pre>
                     </div>
                 </details>
             </div>
@@ -101,7 +101,7 @@
                 <p>Win11Debloat is a simple, easy to use and lightweight PowerShell script that can remove pre-installed Windows bloatware apps, disable telemetry and declutter the experience by disabling or removing intrusive interface elements, ads and more. No need to painstakingly go through all the settings yourself or remove apps one by one. Win11Debloat makes the process quick and easy!</p>
                 <p>Link direct to the project: <a href="https://github.com/Raphire/Win11Debloat">Win11Debloat</a></p>
                 <p>Below is the command I use:</p>
-                <code>& ([scriptblock]::Create((irm "https://win11debloat.raphi.re/"))) -RunDefaults -Silent -RemoveCommApps -RemoveW11Outlook -RemoveGamingApps -DisableDVR -ClearStartAllUsers -HideTaskview -DisableRecall -ExplorerToThisPC </code>
+                <pre><code>& ([scriptblock]::Create((irm "https://win11debloat.raphi.re/"))) -RunDefaults -Silent -RemoveCommApps -RemoveW11Outlook -RemoveGamingApps -DisableDVR -ClearStartAllUsers -HideTaskview -DisableRecall -ExplorerToThisPC </code></pre>
             </div>
         </details>
     </main>
