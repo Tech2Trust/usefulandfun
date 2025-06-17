@@ -118,7 +118,7 @@ code {
   margin-top: 0.5em;
   border-radius: 5px;
   font-family: Consolas, monospace;
-  white-space: pre-wrap;
+  white-space: pre;
   word-break: break-word;
 }
 
