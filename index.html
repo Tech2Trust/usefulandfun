@@ -24,7 +24,7 @@
             <summary>HyperV</summary>
             <div>
                 <details>
-                    <summary>Updating VM-W11-SYSPREP</summary>
+                    <summary>Update VM-W11-SYSPREP</summary>
                     <div>
                         <ol class="checklist numbered">
                         <li><label><input type="checkbox"><span>Start VM-W11-SYSPREP</span></label></li>
@@ -52,9 +52,8 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
                         </ol>
                     </div>
                 </details>
-                
                 <details>
-                    <summary><strong>Depoly SBX from SYSPREP</strong></summary>
+                    <summary>Depoly SBX from SYSPREP</summary>
                     <div>
                         <ol>
                             <li><label><input type="checkbox"><span>Hyper-V Manager > Import Virtual Machine… </span></label></li>
@@ -65,27 +64,28 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
                                     <li>Create new and set all to new folder</li>
                                     <li>C:\HyperV\VM-W11-SBX-##\</li>
                                 </ul>
-                            <li><label><input type="checkbox"><span>Original vhdx C:\HyperV\VM-W11-SYSPREP\ </span></label></li>
-                            <li><label><input type="checkbox"><span>New vhdx C:\HyperV\VM-W11-SBX-##\ </span></label></li>
+                            <li><label><input type="checkbox"><span>Original vhdx C:\HyperV\VM-W11-SYSPREP\</span></label></li>
+                            <li><label><input type="checkbox"><span>New vhdx C:\HyperV\VM-W11-SBX-##\</span></label></li>
                             <li><label><input type="checkbox"><span>Finish</span></label></li>
                             <li><label><input type="checkbox"><span>Rename newly imported VM</span></label></li>
-                            <li><label><input type="checkbox"><span>Setting > Rename and select the vhdx </span></label></li>
-                            <li><label><input type="checkbox"><span>Start VM and complete OOBE </span></label></li>
+                            <li><label><input type="checkbox"><span>Setting > Rename and select the vhdx</span></label></li>
+                            <li><label><input type="checkbox"><span>Start VM and complete OOBE</span></label></li>
                                 <ul>
                                     <li>Setup for work or school to create local profile</li>
                                 </ul>
-                            <li><label><input type="checkbox"><span>Admin Terminal > Win11Debloat </span></label></li>
+                            <li><label><input type="checkbox"><span>Admin Terminal > Win11Debloat</span></label></li>
                                 <pre><code>C:\Scripts\Win11Debloat.ps1"</code></pre>
-                            <li><label><input type="checkbox"><span>Shutdown </span></label></li>
-                            <li><label><input type="checkbox"><span>Settings > Security > Enable Shielding </span></label></li>
-                            <li><label><input type="checkbox"><span>Settings > Network > Isolated </span></label></li>
-                            <li><label><input type="checkbox"><span>Create STARTHERE checkpoint </span></label></li>
+                            <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete automatic checkpoint</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Security > Enable Shielding</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Network > Isolated</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</span></label></li>
                       </ol>
                     </div>
                   </details>
 
                 <details>
-                    <summary>Updating VM-W11-SBX-##</summary>
+                    <summary>Update VM-W11-SBX-##</summary>
                     <div>
                         <ol class="checklist numbered">
                         <li><label><input type="checkbox"><span>Revert to START HERE checkpoint</span></label></li>
