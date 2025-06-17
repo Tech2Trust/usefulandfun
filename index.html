@@ -52,6 +52,38 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
                         </ol>
                     </div>
                 </details>
+                
+                <details>
+                    <summary><strong>Depoly SBX from SYSPREP</strong></summary>
+                    <div>
+                        <ol>
+                            <li><label><input type="checkbox"><span>Hyper-V Manager > Import Virtual Machine… </span></label></li>
+                            <li><label><input type="checkbox"><span>C:\HyperV\VM-W11-SYSPREP </span></label></li>
+                            <li><label><input type="checkbox"><span>Copy the virtual machine (Create a new unique ID) </span></label></li>
+                            <li><label><input type="checkbox"><span>Store the virtual machine in a different location </span></label></li>
+                                <ul>
+                                    <li>Create new and set all to new folder</li>
+                                    <li>C:\HyperV\VM-W11-SBX-##\</li>
+                                </ul>
+                            <li><label><input type="checkbox"><span>Original vhdx C:\HyperV\VM-W11-SYSPREP\ </span></label></li>
+                            <li><label><input type="checkbox"><span>New vhdx C:\HyperV\VM-W11-SBX-##\ </span></label></li>
+                            <li><label><input type="checkbox"><span>Finish</span></label></li>
+                            <li><label><input type="checkbox"><span>Rename newly imported VM</span></label></li>
+                            <li><label><input type="checkbox"><span>Setting > Rename and select the vhdx </span></label></li>
+                            <li><label><input type="checkbox"><span>Start VM and complete OOBE </span></label></li>
+                                <ul>
+                                    <li>Setup for work or school to create local profile</li>
+                                </ul>
+                            <li><label><input type="checkbox"><span>Admin Terminal > Win11Debloat </span></label></li>
+                                <pre><code>C:\Scripts\Win11Debloat.ps1"</code></pre>
+                            <li><label><input type="checkbox"><span>Shutdown </span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Security > Enable Shielding </span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Network > Isolated </span></label></li>
+                            <li><label><input type="checkbox"><span>Create STARTHERE checkpoint </span></label></li>
+                      </ol>
+                    </div>
+                  </details>
+
                 <details>
                     <summary>Updating VM-W11-SBX-##</summary>
                     <div>
