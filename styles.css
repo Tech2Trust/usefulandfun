@@ -118,7 +118,7 @@ code {
   margin-top: 0.5em;
   border-radius: 5px;
   font-family: Consolas, monospace;
-  white-space: pre;
+  white-space: pre-wrap;
   word-break: break-word;
 }
 
@@ -129,7 +129,7 @@ pre code {
   padding: 1em;
   margin-top: 0.5em;
   border-radius: 5px;
-  white-space: pre;
+  white-space: pre-wrap;
   word-break: break-word;
   overflow-x: auto;
 }
