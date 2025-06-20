@@ -116,11 +116,44 @@ winget update --all
         <details>
             <summary>PowerShell</summary>
             <div>
-                <p>Work in Progress...many scripts will be here soon.</p>
+                <p>Work in Progress...</p>
                 <details>
                     <summary>Network</summary>
                     <div>
-                        <pre><code>Get-NetIPConfiguration</code></pre>
+                        <details>
+                            <summary>Misc
+                                <div>
+                                    <p>ipconfig /all for PowerShell</p>
+                                    <pre><code>Get-NetIPConfiguration</code></pre>
+                                    <p>Test Network</p>
+                                    <pre><code>Test-Connection</code></pre>
+                                    <pre><code>Test-NetConnection</code></pre>
+                                    <p>Resolve hostname / domain</p>
+                                    <pre><code>Resolve-DnsName</code></pre>
+                                    <p>Resolve DNS Names from a list of IPs</p>
+                                    <pre><code>
+$ips = @("8.8.8.8", "8.8.4.4", "1.1.1.1")
+foreach ($ip in $ips) {
+    $result = Resolve-DnsName -Name $ip
+    $result | ForEach-Object {
+        [PSCustomObject]@{
+            IPAddress = $ip
+            NameHost  = $_.NameHost
+        }
+    }
+}
+                                    </code></pre>
+                                    <p>Resolve IPs from a list of DNS Names</p>
+                                    <pre><code>
+$hostnames = @("example.com", "google.com", "microsoft.com")
+foreach ($hostname in $hostnames) {
+    $result = Resolve-DnsName -Name $hostname
+    $result | Select-Object -Property Name, IPAddress
+}
+                                    </code></pre>
+                                </div>
+                            </summary>
+                        </details>
                         <details>
                             <summary>Resolve domains from IPs</summary>
                             <div>
