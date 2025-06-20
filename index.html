@@ -121,6 +121,120 @@ winget update --all
                     <summary>Network</summary>
                     <div>
                         <pre><code>Get-NetIPConfiguration</code></pre>
+                        <details>
+                            <summary>Resolve domains from IPs</summary>
+                            <div>
+                                <pre><code>
+# Define your VirusTotal API key
+$apiKey = "YOUR_API_KEY"
+
+# Define the list of IP addresses
+# $ipAddresses = @("1.1.1.1", "2.2.2.2", "3.3.3.3")
+$ipAddresses = @("8.8.8.8", "8.8.4.4", "1.1.1.1")
+
+# Function to get associated domains from VirusTotal
+function Get-AssociatedDomains {
+    param (
+        [string]$ip,
+        [string]$apiKey
+    )
+    $url = "https://www.virustotal.com/vtapi/v2/ip-address/report?apikey=$apiKey&ip=$ip"
+    $response = Invoke-RestMethod -Uri $url -Method Get
+    return $response.resolutions | Select-Object -Property hostname
+}
+
+# Initialize an array to store results
+$results = @()
+
+# Get associated domains for each IP address
+foreach ($ip in $ipAddresses) {
+    $domains = Get-AssociatedDomains -ip $ip -apiKey $apiKey
+    $domains | ForEach-Object {
+        $results += [PSCustomObject]@{
+            IPAddress = $ip
+            Domain    = $_.hostname
+        }
+    }
+}
+
+# Output the results to a CSV file
+$csvFile = "associated_domains_results.csv"
+$results | Export-Csv -Path $csvFile -NoTypeInformation
+
+Write-Host "Results have been written to $csvFile"
+                                </code></pre>
+                            </div>
+                        </details>
+                        <details>
+                            <summary>Subdomain Discovery</summary>
+                            <div>
+                                <pre><code>
+# Define your VirusTotal API key
+$apiKey = "VirusTotal API Key"
+
+# Define the domains for subdomain discovery
+$domainsForSubdomainDiscovery = @("example.com", "anotherdomain.com")
+
+# Define other domains that do not need subdomain discovery
+$otherDomains = @("yetanotherdomain.com", "somedomain.com")
+
+# Function to get subdomains from VirusTotal
+function Get-Subdomains {
+    param (
+        [string]$domain,
+        [string]$apiKey
+    )
+    $url = "https://www.virustotal.com/vtapi/v2/domain/report?apikey=$apiKey&domain=$domain"
+    $response = Invoke-RestMethod -Uri $url -Method Get
+    return $response.subdomains
+}
+
+# Function to resolve IP addresses
+function Resolve-IP {
+    param (
+        [string]$domain
+    )
+    $result = Resolve-DnsName -Name $domain
+    return $result | Select-Object -Property Name, IPAddress
+}
+
+# Initialize an array to store results
+$results = @()
+
+# Discover subdomains and resolve IPs for specified domains
+foreach ($domain in $domainsForSubdomainDiscovery) {
+    $subdomains = Get-Subdomains -domain $domain -apiKey $apiKey
+    $allDomains = $subdomains + $domain
+    foreach ($subdomain in $allDomains) {
+        $ips = Resolve-IP -domain $subdomain
+        $ips | ForEach-Object {
+            $results += [PSCustomObject]@{
+                Domain    = $subdomain
+                IPAddress = $_.IPAddress
+            }
+        }
+    }
+}
+
+# Resolve IPs for other domains
+foreach ($domain in $otherDomains) {
+    $ips = Resolve-IP -domain $domain
+    $ips | ForEach-Object {
+        $results += [PSCustomObject]@{
+            Domain    = $domain
+            IPAddress = $_.IPAddress
+        }
+    }
+}
+
+# Output the results to a CSV file
+$csvFile = "dns_resolution_results.csv"
+$results | Export-Csv -Path $csvFile -NoTypeInformation
+
+Write-Host "Results have been written to"$csvFile
+                                </code></pre>
+                            </div>
+                        </details>
                     </div>
                 </details>
             </div>
