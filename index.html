@@ -121,7 +121,7 @@ winget update --all
                     <summary>Network</summary>
                     <div>
                         <details>
-                            <summary>Misc
+                            <summary>Misc</summary>
                                 <div>
                                     <p>ipconfig /all for PowerShell</p>
                                     <pre><code>Get-NetIPConfiguration</code></pre>
@@ -130,6 +130,8 @@ winget update --all
                                     <pre><code>Test-NetConnection</code></pre>
                                     <p>Resolve hostname / domain</p>
                                     <pre><code>Resolve-DnsName</code></pre>
+                                    <p>Change DNS Server</p>
+                                    <pre><code>Set-DnsClientServerAddress -InterfaceAlias "vEthernet (IsolatedInternal)" -ServerAddresses ("192.168.1.1", "192.168.1.2")</code></pre>
                                     <p>Resolve DNS Names from a list of IPs</p>
                                     <pre><code>
 $ips = @("8.8.8.8", "8.8.4.4", "1.1.1.1")
@@ -152,10 +154,9 @@ foreach ($hostname in $hostnames) {
 }
                                     </code></pre>
                                 </div>
-                            </summary>
                         </details>
                         <details>
-                            <summary>Resolve domains from IPs</summary>
+                            <summary>Resolve domains from IPs using VirusTotal API</summary>
                             <div>
                                 <pre><code>
 # Define your VirusTotal API key
@@ -199,7 +200,7 @@ Write-Host "Results have been written to $csvFile"
                             </div>
                         </details>
                         <details>
-                            <summary>Subdomain Discovery</summary>
+                            <summary>Subdomain Discovery using VirusTotal API</summary>
                             <div>
                                 <pre><code>
 # Define your VirusTotal API key
