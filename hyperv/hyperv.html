@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyper-V</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to external CSS -->
+</head>
+<body>
+
+    <header>
+        <h1>Hyper-V</h1>
+    </header>
+
+    <main>
+        <details>
+            <summary>HyperV</summary>
+            <div>
+                <details>
+                    <summary>Update VM-W11-SYSPREP</summary>
+                    <div>
+                        <ol class="checklist numbered">
+                            <li><label><input type="checkbox"><span>Start VM-W11-SYSPREP</span></label></li>
+                            <li><label><input type="checkbox"><span>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                            <li><label><input type="checkbox"><span>Restart using the Windows Update prompt</span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                            <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
+                            <pre><code>
+winget update
+winget update --all
+                            </code></pre>
+                            <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
+                            <li><label><input type="checkbox"><span>Cleanup winget in Admin terminal</span></label></li>
+                            <pre><code>
+Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
+                            </code></pre>
+                            <li><label><input type="checkbox"><span>Run SysPrep</span></label></li>
+                            <pre><code>
+C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown
+                            </code></pre>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</span></label></li>
+                            <li><label><input type="checkbox"><span>7zip > "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" > Right-click VM-W11-SYSPREP.vhdx > Add to archive... > C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY > Split to 1000M > Background</span></label></li>
+                        </ol>
+                    </div>
+                </details>
+                <details>
+                    <summary>Depoly SBX from SYSPREP</summary>
+                    <div>
+                        <ol class="checklist numbered">
+                            <li><label><input type="checkbox"><span>Hyper-V Manager > Import Virtual Machine… </span></label></li>
+                            <li><label><input type="checkbox"><span>C:\HyperV\VM-W11-SYSPREP </span></label></li>
+                            <li><label><input type="checkbox"><span>Copy the virtual machine (Create a new unique ID) </span></label></li>
+                            <li><label><input type="checkbox"><span>Store the virtual machine in a different location </span></label></li>
+                                <ul>
+                                    <li>Create new and set all to new folder</li>
+                                    <li>C:\HyperV\VM-W11-SBX-##\</li>
+                                </ul>
+                            <li><label><input type="checkbox"><span>Original vhdx C:\HyperV\VM-W11-SYSPREP\</span></label></li>
+                            <li><label><input type="checkbox"><span>New vhdx C:\HyperV\VM-W11-SBX-##\</span></label></li>
+                            <li><label><input type="checkbox"><span>Finish</span></label></li>
+                            <li><label><input type="checkbox"><span>Rename newly imported VM</span></label></li>
+                            <li><label><input type="checkbox"><span>Setting > Rename and select the vhdx</span></label></li>
+                            <li><label><input type="checkbox"><span>Start VM and complete OOBE</span></label></li>
+                                <ul>
+                                    <li>Setup for work or school to create local profile</li>
+                                </ul>
+                            <li><label><input type="checkbox"><span>Admin Terminal > Win11Debloat</span></label></li>
+                                <pre><code>C:\Scripts\Win11Debloat.ps1"</code></pre>
+                            <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete automatic checkpoint</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Security > Enable Shielding</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Network > Isolated</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</span></label></li>
+                      </ol>
+                    </div>
+                </details>
+                <details>
+                    <summary>Update VM-W11-SBX-##</summary>
+                    <div>
+                        <ol class="checklist numbered">
+                            <li><label><input type="checkbox"><span>Revert to START HERE checkpoint</span></label></li>
+                            <li><label><input type="checkbox"><span>Start VM-W11-SBX-##</span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                            <li><label><input type="checkbox"><span>Restart using the Windows Update prompt</span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
+                            <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
+                            <pre><code>
+winget update
+winget update --all
+                            </code></pre>
+                            <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
+                            <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete START HERE checkpoint</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Management > Name > Update the Notes</span></label></li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </details>
+    </main>
+    
+    <header>
+        <h1></h1>
+    </header>
+
+    <main>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Tech2Trust</p>
+    </footer>
+
+</body>
+</html>
