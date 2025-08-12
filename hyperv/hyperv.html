@@ -31,7 +31,7 @@ winget update
 winget update --all
                             </code></pre>
                             <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
-                            <li><a href="unattend.xml">Unattended xml (Save here C:\Windows\System32\Sysprep\).</a></li>
+                            <li><a href="unattend.xml" download>Unattend xml (Save here C:\Windows\System32\Sysprep\).</a></li>
                             <li><label><input type="checkbox"><span>Cleanup winget in Admin terminal</span></label></li>
                             <pre><code>
 Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
@@ -50,7 +50,7 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:
                     <summary>Depoly SBX from SYSPREP</summary>
                     <div>
                         <ol class="checklist numbered">
-                            <li><a href="deployVMfromSYSPREP.ps1">Deploy VM from SYSPREP by script.</a></li>
+                            <li><a href="deployVMfromSYSPREP.ps1" download>Deploy VM from SYSPREP by script.</a></li>
                             <li><label><input type="checkbox"><span>Hyper-V Manager > Import Virtual Machine… </span></label></li>
                             <li><label><input type="checkbox"><span>C:\HyperV\VM-W11-SYSPREP </span></label></li>
                             <li><label><input type="checkbox"><span>Copy the virtual machine (Create a new unique ID) </span></label></li>
