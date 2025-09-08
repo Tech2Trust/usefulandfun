@@ -20,6 +20,7 @@
                     <summary>Update VM-W11-SYSPREP</summary>
                     <div>
                         <ol class="checklist numbered">
+                            <li><label><input type="checkbox"><span>7-Zip > Right-click "C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY\VM-W11-SYSPREP.7z.001" > 7-Zip > Extract Files... > "C:\HyperV\VM-W11-SYSPREP" > Unselect creating a folder > Select 'Eliminate duplication of root folder' > Overwrite Mode: Overwrite without prompt > Background</span></label></li>
                             <li><label><input type="checkbox"><span>Start VM-W11-SYSPREP</span></label></li>
                             <li><label><input type="checkbox"><span>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</span></label></li>
                             <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
@@ -31,19 +32,26 @@ winget update
 winget update --all
                             </code></pre>
                             <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
-                            <li><label><input type="checkbox"><span><a href="unattend.xml" download>Unattend xml (Save here C:\Windows\System32\Sysprep\).</a></span></label></li>
-                            <li><label><input type="checkbox"><span>SHA256 5FEE2B1A28CE90A8CAAD81F05B343D40B598E37E93BE08BB56C3825E78CAC1DF</span></label></li>
                             <li><label><input type="checkbox"><span>Cleanup winget in Admin terminal</span></label></li>
                             <pre><code>
 Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.Winget.Source*' } | Remove-AppxPackage
                             </code></pre>
-                            <li><label><input type="checkbox"><span>Run SysPrep</span></label></li>
+                            <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</span></label></li>
+                            <li><label><input type="checkbox"><span>7zip > "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" > Right-click VM-W11-SYSPREP.vhdx > Add to archive... > C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY > Split to 1000M > Background</span></label></li>
+                            <li><label><input type="checkbox"><span>Start VM-W11-SYSPREP</span></label></li>
+                            <li><label><input type="checkbox"><span>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</span></label></li>
+                            <li><label><input type="checkbox"><span><a href="unattend.xml" download>Unattend xml (Save here <strong>C:\Windows\System32\Sysprep\</strong>).</a></span></label></li>
+                            <li><label><input type="checkbox"><span>Admin Powershell to check SHA256</span></label></li>
+                            <pre><code>
+if ((Get-FileHash "C:\Windows\System32\Sysprep\unattend.xml" -Algorithm SHA256).Hash -eq "5FEE2B1A28CE90A8CAAD81F05B343D40B598E37E93BE08BB56C3825E78CAC1DF") { "Hash matches" } else { "Hash does NOT match" }
+                            </code></pre>
+                            <li><label><input type="checkbox"><span>Run SysPrep in Admin terminal</span></label></li>
                             <pre><code>
 C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:\Windows\System32\Sysprep\unattend.xml
                             </code></pre>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</span></label></li>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Settings > Management > Name > Update the Notes</span></label></li>
-                            <li><label><input type="checkbox"><span>7zip > "C:\HyperV\VM-W11-SYSPREP\Virtual Hard Disks" > Right-click VM-W11-SYSPREP.vhdx > Add to archive... > C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY > Split to 1000M > Background</span></label></li>
                         </ol>
                     </div>
                 </details>
@@ -51,30 +59,14 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:
                     <summary>Depoly SBX from SYSPREP</summary>
                     <div>
                         <ol class="checklist numbered">
-                            <li><a href="deployVMfromSYSPREP.ps1" download>Deploy VM from SYSPREP by script.</a></li>
-                            <li><label><input type="checkbox"><span>Hyper-V Manager > Import Virtual Machine… </span></label></li>
-                            <li><label><input type="checkbox"><span>C:\HyperV\VM-W11-SYSPREP </span></label></li>
-                            <li><label><input type="checkbox"><span>Copy the virtual machine (Create a new unique ID) </span></label></li>
-                            <li><label><input type="checkbox"><span>Store the virtual machine in a different location </span></label></li>
-                                <ul>
-                                    <li>Create new and set all to new folder</li>
-                                    <li>C:\HyperV\VM-W11-SBX-##\</li>
-                                </ul>
-                            <li><label><input type="checkbox"><span>Original vhdx C:\HyperV\VM-W11-SYSPREP\</span></label></li>
-                            <li><label><input type="checkbox"><span>New vhdx C:\HyperV\VM-W11-SBX-##\</span></label></li>
-                            <li><label><input type="checkbox"><span>Finish</span></label></li>
-                            <li><label><input type="checkbox"><span>Rename newly imported VM</span></label></li>
-                            <li><label><input type="checkbox"><span>Setting > Rename and select the vhdx</span></label></li>
-                            <li><label><input type="checkbox"><span>Start VM and complete OOBE</span></label></li>
-                                <ul>
-                                    <li>Setup for work or school to create local profile</li>
-                                </ul>
+                            <li><label><input type="checkbox"><span></span><a href="deployVMfromSYSPREP.ps1" download>Deploy VM from SYSPREP by script.</a></span></label></li>
+                            <li><label><input type="checkbox"><span>Connect to each SBX in turn and complete the following.</span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > Network... > Ethernet > IP Assignment > Manual > Add necessary IP info. </span></label></li>
                             <li><label><input type="checkbox"><span>Admin Terminal > Win11Debloat</span></label></li>
                                 <pre><code>C:\Scripts\Win11Debloat.ps1"</code></pre>
-                            <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                            <li><label><input type="checkbox"><span>Settings > System > Rename > Update the Hostname > Save > Shutdown </span></label></li>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete automatic checkpoint</span></label></li>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Security > Enable Shielding</span></label></li>
-                            <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Settings > Network > Isolated</span></label></li>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Checkpoint > Rename to START HERE</span></label></li>
                       </ol>
                     </div>

@@ -1,85 +1,73 @@
-# Define paths and names
+# Define constants
 $hypervPath = "C:\HyperV"
-$sysprepPath = "$hypervPath\VM-W11-SYSPREP"
-$sysprepName = "VM-W11-SYSPREP"
-$logPath = "$hypervPath\SysPrepExportImport.log"
+$sysprepPath = Join-Path $hypervPath "VM-W11-SYSPREP"
+$vmSwitchName = "IsolatedInternal"  # Change this per host
 $vmNames = @("VM-W11-SBX-01", "VM-W11-SBX-02")
+$memoryStartupBytes = 2GB
 
-# Function to write to log
+# Logging function
 function Write-Log {
     param ([string]$message)
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $entry = "$timestamp - $message"
-    Add-Content -Path $logPath -Value $entry
-    Write-Host $message
+    Write-Host $entry
 }
 
-# Function to remove a VM and clear its folder
-function Remove-VMAndClearFolder {
+# Create new VM from SYSPREP VHDX
+function Create-NewVMFromSysprep {
     param (
         [string]$vmName,
-        [string]$vmPath
+        [string]$sysprepVhdxPath,
+        [string]$targetPath
     )
 
+    # Remove existing VM if it exists
     if (Get-VM -Name $vmName -ErrorAction SilentlyContinue) {
         Stop-VM -Name $vmName -Force
         Remove-VM -Name $vmName -Force
-        Write-Log "Removed VM: $vmName"
+        Write-Log "Removed existing VM: $vmName"
     }
 
-    if (Test-Path $vmPath) {
-        Remove-Item -Path "$vmPath\*" -Recurse -Force
-        Write-Log "Cleared folder: $vmPath"
+    # Prepare target folder
+    if (Test-Path $targetPath) {
+        Remove-Item -Path "$targetPath\*" -Recurse -Force
+        Write-Log "Cleared folder: $targetPath"
+    } else {
+        New-Item -Path $targetPath -ItemType Directory | Out-Null
+        Write-Log "Created folder: $targetPath"
     }
+
+    # Copy and rename VHDX
+    $newVhdxPath = Join-Path $targetPath "$vmName.vhdx"
+    Copy-Item -Path $sysprepVhdxPath -Destination $newVhdxPath
+    Write-Log "Copied SYSPREP VHDX to: $newVhdxPath"
+
+    # Create new VM
+    New-VM -Name $vmName -MemoryStartupBytes $memoryStartupBytes -Generation 2 -Path $targetPath | Out-Null
+    Add-VMScsiController -VMName $vmName
+    Add-VMHardDiskDrive -VMName $vmName -ControllerType SCSI -Path $newVhdxPath
+    Set-VMFirmware -VMName $vmName -EnableSecureBoot On -SecureBootTemplate "MicrosoftWindows"
+
+    # Connect to virtual switch
+    Connect-VMNetworkAdapter -VMName $vmName -SwitchName $vmSwitchName
+    Write-Log "Connected VM '$vmName' to switch '$vmSwitchName'"
+
+    # Start the VM
+    Start-VM -Name $vmName
+    Write-Log "Started VM: $vmName"
 }
 
-# Function to import and configure a new VM
-function Import-NewVM {
-    param (
-        [string]$sourcePath,
-        [string]$targetPath,
-        [string]$vmName
-    )
-
-    try {
-        # Import the VM from SYSPREP folder
-        $importedVM = Import-VM -Path $sourcePath -Copy -GenerateNewId -VhdDestinationPath $targetPath -VirtualMachinePath $targetPath -SnapshotFilePath $targetPath -SmartPagingFilePath $targetPath
-        Rename-VM -VM $importedVM -NewName $vmName
-        Write-Log "Imported and renamed VM to: $vmName"
-
-        # Rename the VHDX file
-        $vhdx = Get-ChildItem -Path $targetPath -Filter *.vhdx | Select-Object -First 1
-        if ($vhdx) {
-            $newVhdxName = "$vmName.vhdx"
-            Rename-Item -Path $vhdx.FullName -NewName $newVhdxName
-            Write-Log "Renamed VHDX to: $newVhdxName"
-
-            Set-VMHardDiskDrive -VMName $vmName -ControllerType SCSI -Path "$targetPath\$newVhdxName"
-            Write-Log "Updated VM configuration to use new VHDX file"
-        }
-
-        # Start the VM
-        Start-VM -Name $vmName
-        Write-Log "Started VM: $vmName"
-    }
-    catch {
-        Write-Log "ERROR processing ${vmName}: $($_)"
-    }
+# Get SYSPREP VHDX
+$sysprepVhdx = Get-ChildItem -Path $sysprepPath -Filter *.vhdx | Select-Object -First 1
+if (-not $sysprepVhdx) {
+    Write-Log "ERROR: No SYSPREP VHDX found in $sysprepPath"
+    exit
 }
 
-# Start logging
-Write-Log "=== Script started ==="
-
-# Remove existing VMs and clear folders
+# Create VMs
 foreach ($vmName in $vmNames) {
-    $vmPath = "$hypervPath\$vmName"
-    Remove-VMAndClearFolder -vmName $vmName -vmPath $vmPath
+    $targetPath = Join-Path $hypervPath $vmName
+    Create-NewVMFromSysprep -vmName $vmName -sysprepVhdxPath $sysprepVhdx.FullName -targetPath $targetPath
 }
 
-# Import new VMs
-foreach ($vmName in $vmNames) {
-    $vmPath = "$hypervPath\$vmName"
-    Import-NewVM -sourcePath $sysprepPath -targetPath $vmPath -vmName $vmName
-}
-
-Write-Log "=== Script completed successfully ==="
+Write-Log "=== All VMs created successfully ==="
