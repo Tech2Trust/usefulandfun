@@ -44,7 +44,7 @@ Get-AppxPackage -AllUsers | Where-Object { $_.PackageFullName -like '*Microsoft.
                             <li><label><input type="checkbox"><span><a href="unattend.xml" download>Unattend xml (Save here <strong>C:\Windows\System32\Sysprep\</strong>).</a></span></label></li>
                             <li><label><input type="checkbox"><span>Admin Powershell to check SHA256</span></label></li>
                             <pre><code>
-if ((Get-FileHash "C:\Windows\System32\Sysprep\unattend.xml" -Algorithm SHA256).Hash -eq "B20609F75130DB6EA41A9C8DB844E18E4B085246E4606957A0335DA7A12EBCC4") { "Hash matches" } else { "Hash does NOT match" }
+if ((Get-FileHash "C:\Windows\System32\Sysprep\unattend.xml" -Algorithm SHA256).Hash -eq "5FEE2B1A28CE90A8CAAD81F05B343D40B598E37E93BE08BB56C3825E78CAC1DF") { "Hash matches" } else { "Hash does NOT match" }
                             </code></pre>
                             <li><label><input type="checkbox"><span>Run SysPrep in Admin terminal</span></label></li>
                             <pre><code>
@@ -60,6 +60,10 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:
                     <div>
                         <ol class="checklist numbered">
                             <li><label><input type="checkbox"><span></span><a href="deployVMfromSYSPREP.ps1" download>Deploy VM from SYSPREP by script.</a></span></label></li>
+                            <li><label><input type="checkbox"><span>Admin Powershell to check SHA256</span></label></li>
+                            <pre><code>
+$h="B20609F75130DB6EA41A9C8DB844E18E4B085246E4606957A0335DA7A12EBCC4";$p=(Read-Host "Path to .ps1 file").Trim('"');if(Test-Path $p){if((Get-FileHash $p -Algorithm SHA256).Hash -eq $h){"Hash matches"}else{"Hash does NOT match"}}else{"File not found"}
+                            </code></pre>
                             <li><label><input type="checkbox"><span>Connect to each SBX in turn and complete the following.</span></label></li>
                             <li><label><input type="checkbox"><span>Settings > Network... > Ethernet > IP Assignment > Manual > Add necessary IP info. </span></label></li>
                             <li><label><input type="checkbox"><span>Admin Terminal for Win11Debloat</span></label></li>
