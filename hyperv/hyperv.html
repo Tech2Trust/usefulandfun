@@ -23,18 +23,8 @@
                             <li><label><input type="checkbox"><span>7-Zip > Right-click "C:\Users\...\Downloads\OS\VM-W11-SYSPREP\MMxYYYY\VM-W11-SYSPREP.7z.001" > 7-Zip > Extract Files... > "C:\HyperV\VM-W11-SYSPREP" > Unselect creating a folder > Select 'Eliminate duplication of root folder' > Overwrite Mode: Overwrite without prompt > Background</span></label></li>
                             <li><label><input type="checkbox"><span>Start VM-W11-SYSPREP</span></label></li>
                             <li><label><input type="checkbox"><span>Ctrl+Shift+F3 to access Audit Mode at start of OOBE</span></label></li>
-                            <li><label><input type="checkbox"><span><a href="updateSysprep.ps1" download>Update SYSPREP Script.</a></span></label></li>
-                            <li><label><input type="checkbox"><span>If the script is successful then skip to Delete all checkpoints...</span></label></li>
-                            <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
-                            <li><label><input type="checkbox"><span>Restart using the Windows Update prompt</span></label></li>
-                            <li><label><input type="checkbox"><span>Settings > Windows Update > Check for updates</span></label></li>
-                            <li><label><input type="checkbox"><span>Terminal (not admin)</span></label></li>
-                            <pre><code>
-winget update
-winget update --all
-                            </code></pre>
-                            <li><label><input type="checkbox"><span>Settings > System > Storage > Temporary Files > Remove Files</span></label></li>
-                            <li><label><input type="checkbox"><span>Shutdown</span></label></li>
+                            <li><label><input type="checkbox"><span><a href="updateSysprep.ps1" download>Download</a> and run updateSysprep.ps1.</span></label></li>
+                            <li><label><input type="checkbox"><span>VM will reboot if necessary or shutdown otherwise.  Rerun the script until the VM is shutdown.</span></label></li>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SYSPREP > Delete all checkpoints</span></label></li>
                             <li><label><input type="checkbox"><span>Compact VHDX in Admin terminal</span></label></li>
                             <pre><code>
