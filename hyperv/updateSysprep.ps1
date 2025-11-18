@@ -27,10 +27,15 @@ if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
 Import-Module PSWindowsUpdate
 
 # --- Ensure SDelete is installed ---
-$sdeletePath = "C:\Program Files\Sysinternals\SDelete\sdelete64.exe"
-if (-not (Test-Path $sdeletePath)) {
+$sdeleteExe = "sdelete64.exe"
+$sdeletePath = Get-Command $sdeleteExe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
+
+if (-not $sdeletePath) {
     Write-Host "SDelete not found, installing via winget..."
     winget install --id Microsoft.Sysinternals.SDelete -e --accept-package-agreements --accept-source-agreements
+
+    # Re-check after installation
+    $sdeletePath = Get-Command $sdeleteExe -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source
 }
 
 # 1. Install all Windows Updates (auto-reboot if needed)
@@ -70,11 +75,11 @@ foreach ($path in $TempPaths) {
 }
 
 # 5. Run SDelete to zero free space
-if (Test-Path $sdeletePath) {
-    Write-Host "Running SDelete..."
-    Start-Process -Wait -FilePath $sdeletePath -ArgumentList "-z C:"
+if ($sdeletePath) {
+    Write-Host "Running SDelete from $sdeletePath..."
+    Start-Process -Wait -FilePath $sdeletePath -ArgumentList "/accepteula", "-z C:"
 } else {
-    Write-Host "SDelete not found at $sdeletePath. Please check installation."
+    Write-Host "SDelete still not found. Please verify installation."
 }
 
 # 6. Shutdown VM (optional)
