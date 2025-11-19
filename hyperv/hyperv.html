@@ -55,14 +55,14 @@ C:\Windows\System32\Sysprep\sysprep.exe /generalize /oobe /shutdown /unattend:C:
                     <summary>Depoly SBX from SYSPREP</summary>
                     <div>
                         <ol class="checklist numbered">
-                            <li><label><input type="checkbox"><span></span><a href="deployVMfromSYSPREP.ps1" download>Deploy VM from SYSPREP by script.</a></span></label></li>
-                            <li><label><input type="checkbox"><span>Admin Powershell to check SHA256</span></label></li>
+                            <li><label><input type="checkbox"><span></span><a href="deployVMfromSYSPREP.ps1" download>Download</a> script to deploy VMs from VM-W11-SYSPREP.</span></label></li>
+                            <li><label><input type="checkbox"><span>Use Admin Powershell to check SHA256 of the downloaded script.</span></label></li>
                             <pre><code>
 $h="B20609F75130DB6EA41A9C8DB844E18E4B085246E4606957A0335DA7A12EBCC4";$p=(Read-Host "Path to .ps1 file").Trim('"');if(Test-Path $p){if((Get-FileHash $p -Algorithm SHA256).Hash -eq $h){"Hash matches"}else{"Hash does NOT match"}}else{"File not found"}
                             </code></pre>
-                            <li><label><input type="checkbox"><span>Connect to each SBX in turn and complete the following.</span></label></li>
+                            <li><label><input type="checkbox"><span>After VMs have deployed by the script, connect to each SBX in turn and complete the following.</span></label></li>
                             <li><label><input type="checkbox"><span>Settings > Network... > Ethernet > IP Assignment > Manual > Add necessary IP info. </span></label></li>
-                            <li><label><input type="checkbox"><span>Admin Terminal for Win11Debloat</span></label></li>
+                            <li><label><input type="checkbox"><span>Use Admin Powershell to run Win11Debloat.</span></label></li>
                                 <pre><code>C:\Scripts\Win11Debloat.ps1</code></pre>
                             <li><label><input type="checkbox"><span>Settings > System > Rename > Update the Hostname > Save > Shutdown </span></label></li>
                             <li><label><input type="checkbox"><span>HyperV Manager > VM-W11-SBX-## > Delete automatic checkpoint</span></label></li>
